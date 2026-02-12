@@ -54,18 +54,6 @@ namespace _240519P_AS_ASSN2.Pages
                 return Page();
             }
 
-
-            if (InputSanitizer.ContainsMaliciousScript(
-                RModel.FirstName,
-                RModel.LastName,
-                RModel.Email,
-                RModel.BillingAddress,
-                RModel.ShippingAddress))
-            {
-                ModelState.AddModelError("", "Malicious input detected.");
-                return Page();
-            }
-
             if (_db.Users.Any(u => u.Email == RModel.Email))
             {
                 ModelState.AddModelError("", "Email already exists.");

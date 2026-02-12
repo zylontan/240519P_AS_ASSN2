@@ -57,15 +57,6 @@ namespace _240519P_AS_ASSN2.Pages
                 return Page();
             }
 
-            // Script injection protection
-            if (InputSanitizer.ContainsMaliciousScript(
-                Input.Email,
-                Input.Password))
-            {
-                ModelState.AddModelError("", "Invalid input detected.");
-                return Page();
-            }
-
             var identityUser = await _userManager.FindByEmailAsync(Input.Email);
 
             if (identityUser == null)
