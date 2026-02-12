@@ -1,0 +1,49 @@
+﻿@page
+@model _240519P_AS_ASSN2.Pages.LoginModel
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4">
+            <h3 class="mb-4 text-center">Login</h3>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input asp-for="Input.Email" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input asp-for="Input.Password" type="password" class="form-control" />
+                </div>
+                <div class="text-end mb-3">
+                    <a asp-page="/ForgotPassword" class="small text-decoration-none">
+                        Forgot Password?
+                    </a>
+                </div>
+                <input type="hidden" asp-for="RecaptchaToken" id="g-recaptcha-response" />
+
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+
+                <div asp-validation-summary="All" class="text-danger mt-3"></div>
+            </form>
+            <script src="https://www.google.com/recaptcha/api.js?render=6Leg6WgsAAAAAGpeYvvtLAEHO9_YRrQ8Nyp51Ozf"></script>
+            <script>
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('6Leg6WgsAAAAAGpeYvvtLAEHO9_YRrQ8Nyp51Ozf', { action: 'login' })
+                        .then(function (token) {
+                            document.getElementById('g-recaptcha-response').value = token;
+                        });
+                });
+            </script>
+        </div>
+    </div>
+</div>

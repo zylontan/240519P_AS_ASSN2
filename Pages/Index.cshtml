@@ -1,0 +1,19 @@
+﻿@page
+@model _240519P_AS_ASSN2.Pages.IndexModel
+
+<div class="card p-4">
+    <h3 class="mb-4">Your Profile</h3>
+
+    @if (Model.Profile != null)
+    {
+        <p><strong>Name:</strong> @Model.Profile.FirstName @Model.Profile.LastName</p>
+        <p><strong>Email:</strong> @Model.Profile.Email</p>
+        <p><strong>Mobile:</strong> @Model.Profile.MobileNo</p>
+        <p><strong>Billing:</strong> @Model.Profile.BillingAddress</p>
+        <p><strong>Shipping:</strong> @Model.Profile.ShippingAddress</p>
+        <p><strong>Credit Card:</strong> @Model.FullCreditCard</p>
+        <p>Claim SessionId: @User.FindFirst("SessionId")?.Value</p>
+        <p>UserId Claim: @User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value</p>
+
+    }
+</div>

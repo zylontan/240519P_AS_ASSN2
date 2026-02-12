@@ -1,0 +1,20 @@
+﻿@page
+@model _240519P_AS_ASSN2.Pages.VerifyOTPModel
+
+<h3>Two-Factor Authentication</h3>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Enter 6-digit OTP</label>
+        <input asp-for="Input.OTP" class="form-control" />
+        <span asp-validation-for="Input.OTP" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Verify
+    </button>
+</form>
+
+<partial name="_ValidationScriptsPartial" />

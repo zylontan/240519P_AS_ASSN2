@@ -1,0 +1,110 @@
+﻿@page
+@model _240519P_AS_ASSN2.Pages.RegisterModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="mb-4">Create Account</h3>
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>First Name</label>
+                    <input asp-for="RModel.FirstName" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Last Name</label>
+                    <input asp-for="RModel.LastName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="RModel.Email" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Mobile Number</label>
+                <input asp-for="RModel.MobileNo" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Billing Address</label>
+                <input asp-for="RModel.BillingAddress" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Shipping Address</label>
+                <input asp-for="RModel.ShippingAddress" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Credit Card</label>
+                <input asp-for="RModel.CreditCard" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input asp-for="RModel.Password" type="password" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <small id="passwordStrength" class="fw-bold"></small>
+            </div>
+
+            <div class="mb-3">
+                <label>Confirm Password</label>
+                <input asp-for="RModel.ConfirmPassword" type="password" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label>Profile Picture (.jpg only)</label>
+                <input asp-for="RModel.ProfilePicture" type="file" class="form-control" />
+            </div>
+            <input type="hidden" asp-for="RecaptchaToken" id="g-recaptcha-response" />
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+
+            <div asp-validation-summary="All" class="text-danger mt-3"></div>
+
+        </form>
+        <script>
+            const passwordInput = document.querySelector("input[name='RModel.Password']");
+            const strengthText = document.getElementById("passwordStrength");
+
+            passwordInput.addEventListener("input", function () {
+                const val = passwordInput.value;
+
+                let score = 0;
+
+                if (val.length >= 12) score++;
+                if (/[A-Z]/.test(val)) score++;
+                if (/[a-z]/.test(val)) score++;
+                if (/[0-9]/.test(val)) score++;
+                if (/[^A-Za-z0-9]/.test(val)) score++;
+
+                if (score <= 2) {
+                    strengthText.innerText = "Weak";
+                    strengthText.style.color = "red";
+                } else if (score === 3 || score === 4) {
+                    strengthText.innerText = "Moderate";
+                    strengthText.style.color = "orange";
+                } else {
+                    strengthText.innerText = "Strong";
+                    strengthText.style.color = "green";
+                }
+            });
+        </script>
+
+        <script src="https://www.google.com/recaptcha/api.js?render=6Leg6WgsAAAAAGpeYvvtLAEHO9_YRrQ8Nyp51Ozf"></script>
+        <script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Leg6WgsAAAAAGpeYvvtLAEHO9_YRrQ8Nyp51Ozf', { action: 'register' })
+                    .then(function (token) {
+                        document.getElementById('g-recaptcha-response').value = token;
+                    });
+            });
+        </script>
+
+    </div>
+</div>
